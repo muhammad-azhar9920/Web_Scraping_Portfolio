@@ -1,5 +1,8 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class ProxiesCrawler:
 
@@ -12,7 +15,7 @@ class ProxiesCrawler:
 
         valid_proxies = []
         try:
-            link = 'https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc'
+            link = os.getenv("PROXY_URL")
             response = requests.get(link)
             if response.status_code == 200:
                 raw_proxies = json.loads(response.text)
